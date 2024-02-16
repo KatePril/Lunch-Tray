@@ -42,10 +42,18 @@ import com.example.lunchtray.model.OrderUiState
 @Composable
 fun CheckoutScreen(
     orderUiState: OrderUiState,
-    onNextButtonClicked: () -> Unit,
+    onNextButtonClicked: (String, String) -> Unit,
     onCancelButtonClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val newOrder = stringResource(R.string.order_summary)
+
+    val items = listOf(
+        Pair(stringResource(R.string.subtotal), orderUiState.itemTotalPrice),
+        Pair(stringResource(R.string.tax), orderUiState.orderTax),
+        Pair(stringResource(R.string.total), orderUiState.orderTotalPrice)
+    )
+
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small))
@@ -92,7 +100,7 @@ fun CheckoutScreen(
             }
             Button(
                 modifier = Modifier.weight(1f),
-                onClick = onNextButtonClicked
+                onClick = { onNextButtonClicked(newOrder, items.toString()) }
             ) {
                 Text(stringResource(R.string.submit).uppercase())
             }
@@ -129,19 +137,19 @@ fun OrderSubCost(
 @Preview
 @Composable
 fun CheckoutScreenPreview() {
-    CheckoutScreen(
-        orderUiState = OrderUiState(
-            entree = DataSource.entreeMenuItems[0],
-            sideDish = DataSource.sideDishMenuItems[0],
-            accompaniment = DataSource.accompanimentMenuItems[0],
-            itemTotalPrice = 15.00,
-            orderTax = 1.00,
-            orderTotalPrice = 16.00
-        ),
-        onNextButtonClicked = {},
-        onCancelButtonClicked = {},
-        modifier = Modifier
-            .padding(dimensionResource(R.dimen.padding_medium))
-            .verticalScroll(rememberScrollState())
-    )
+//    CheckoutScreen(
+//        orderUiState = OrderUiState(
+//            entree = DataSource.entreeMenuItems[0],
+//            sideDish = DataSource.sideDishMenuItems[0],
+//            accompaniment = DataSource.accompanimentMenuItems[0],
+//            itemTotalPrice = 15.00,
+//            orderTax = 1.00,
+//            orderTotalPrice = 16.00
+//        ),
+//        onNextButtonClicked = {},
+//        onCancelButtonClicked = {},
+//        modifier = Modifier
+//            .padding(dimensionResource(R.dimen.padding_medium))
+//            .verticalScroll(rememberScrollState())
+//    )
 }

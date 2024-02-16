@@ -1,4 +1,4 @@
-Lunch Tray Practice Problem - Starter Code
+Lunch Tray Practice Problem - Solution Code
 ==================================
 
 Starter code for the Jetpack Compose Navigation practice problems
